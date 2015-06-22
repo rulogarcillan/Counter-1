@@ -2,16 +2,21 @@ package ralr.countersomething;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txt_count;
     ImageButton ic_restore, ic_edit;
     RelativeLayout up;
-    int total = 0;
+
     int currentapiVersion;
     SharedPreferences.Editor editor;
     SharedPreferences prefs;
@@ -56,16 +61,8 @@ public class MainActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total = Integer.parseInt(txt_count.getText().toString()) + 1;
-                editor.putInt(KEY_PREF_COUNT, total);
-                editor.commit();
-                if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP) {
-                    efectoDentro();
-                } else {
-                    txt_count.setText(Integer.toString(total));
-                }
 
-
+                cambiaValor(Integer.parseInt(txt_count.getText().toString()) + 1);
 
             }
         });
@@ -73,19 +70,60 @@ public class MainActivity extends AppCompatActivity {
         ic_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total = 0;
-                editor.putInt(KEY_PREF_COUNT, total);
-                editor.commit();
-                if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP) {
-                    efectoDentro();
-                } else {
-                    txt_count.setText(Integer.toString(total));
-                }
+                cambiaValor(0);
+            }
+        });
+
+        ic_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle);
+
+
+                alert.setMessage(R.string.new_value);
+
+
+                final EditText input = new EditText(MainActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+
+                alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Editable value = input.getText();
+                        cambiaValor(Integer.parseInt(value.toString()));
+
+                    }
+                });
+
+                alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                });
+
+                alert.show();
+
             }
         });
     }
 
 
+
+
+    private void cambiaValor(int valor){
+
+
+        editor.putInt(KEY_PREF_COUNT, valor);
+        editor.commit();
+        if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP) {
+            efectoDentro(valor);
+        } else {
+            txt_count.setText(Integer.toString(valor));
+        }
+
+    }
     private void efectoFuera() {
 
 
@@ -105,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         anim.start();
     }
 
-    private void efectoDentro() {
+    private void efectoDentro(final int valor) {
         // get the center for the clipping circle
         // get the center for the clipping circle
         int cx = (txt_count.getLeft() + txt_count.getRight()) / 2;
@@ -123,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 txt_count.setVisibility(View.INVISIBLE);
-                txt_count.setText(Integer.toString(total));
+                txt_count.setText(Integer.toString(valor));
                 efectoFuera();
             }
         });
