@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
@@ -22,12 +21,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TextView txt_count;
     ImageButton ic_restore, ic_edit;
     RelativeLayout up;
-
+    int total = 0;
     int currentapiVersion;
     SharedPreferences.Editor editor;
     SharedPreferences prefs;
@@ -51,18 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();
-
-        txt_count.setText(Integer.toString(prefs.getInt(KEY_PREF_COUNT,0)));
-
-
+        total = prefs.getInt(KEY_PREF_COUNT, 0);
+        txt_count.setText(Integer.toString(total));
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                cambiaValor(Integer.parseInt(txt_count.getText().toString()) + 1);
+                total = total + 1;
+                cambiaValor(total);
 
             }
         });
@@ -70,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
         ic_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cambiaValor(0);
+                total=0;
+                cambiaValor(total);
             }
         });
 
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle);
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.MyAlertDialogStyle);
 
 
                 alert.setMessage(R.string.new_value);
@@ -92,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Editable value = input.getText();
-                        cambiaValor(Integer.parseInt(value.toString()));
+                        total = Integer.parseInt(value.toString());
+                        cambiaValor(total);
 
                     }
                 });
@@ -110,10 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    private void cambiaValor(int valor){
-
+    private void cambiaValor(int valor) {
 
         editor.putInt(KEY_PREF_COUNT, valor);
         editor.commit();
@@ -124,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     private void efectoFuera() {
 
 
@@ -171,25 +168,5 @@ public class MainActivity extends AppCompatActivity {
         anim.start();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -2,4 +2,7 @@
     <string name="app_name">Counter +1</string>
     <string name="action_settings">Settings</string>
     <string name="new_value">New value</string>
+
+    <string name="rate">Rate this app</string>
+    <string name="more">Others app</string>
 </resources>
