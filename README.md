@@ -9,3 +9,6 @@
 This application is a simple elegant counter, its beauty and simplicity of use. Touch the screen and add +1 to take the count.
 
 Too easy.
+
+
+ [GNU GPL V3.0] (LICENSE.md)
