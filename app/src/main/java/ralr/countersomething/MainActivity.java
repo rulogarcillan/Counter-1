@@ -19,6 +19,9 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 
 public class MainActivity extends BaseActivity {
 
@@ -52,6 +55,10 @@ public class MainActivity extends BaseActivity {
         total = prefs.getInt(KEY_PREF_COUNT, 0);
         txt_count.setText(Integer.toString(total));
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         up.setOnClickListener(new View.OnClickListener() {
