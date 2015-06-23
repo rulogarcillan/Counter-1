@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contre +1</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="new_value">Nouvelle valeur</string>
+    <string name="more">Autres applications</string>
+    <string name="rate">Èvaluer l`application</string>
+</resources>

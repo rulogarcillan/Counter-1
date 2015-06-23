@@ -10,9 +10,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.EditText;
@@ -85,12 +84,16 @@ public class MainActivity extends BaseActivity {
 
                 final EditText input = new EditText(MainActivity.this);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(9) });
                 alert.setView(input);
 
                 alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Editable value = input.getText();
-                        total = Integer.parseInt(value.toString());
+                        if (value.toString().equals(""))
+                            total = 0;
+                        else
+                            total = Integer.parseInt(value.toString());
                         cambiaValor(total);
 
                     }
