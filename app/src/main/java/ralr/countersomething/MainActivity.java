@@ -7,8 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -21,6 +20,10 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 
 
 public class MainActivity extends BaseActivity {
@@ -66,14 +69,13 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 total = total + 1;
                 cambiaValor(total);
-
             }
         });
 
         ic_restore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total=0;
+                total = 0;
                 cambiaValor(total);
             }
         });
@@ -91,7 +93,7 @@ public class MainActivity extends BaseActivity {
 
                 final EditText input = new EditText(MainActivity.this);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setFilters(new InputFilter[] { new InputFilter.LengthFilter(9) });
+                input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
                 alert.setView(input);
 
                 alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -123,16 +125,15 @@ public class MainActivity extends BaseActivity {
 
         editor.putInt(KEY_PREF_COUNT, valor);
         editor.commit();
-        if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             efectoDentro(valor);
         } else {
             txt_count.setText(Integer.toString(valor));
         }
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void efectoFuera() {
-
 
         int cx = (txt_count.getLeft() + txt_count.getRight()) / 2;
         int cy = (txt_count.getTop() + txt_count.getBottom()) / 2;
@@ -140,9 +141,7 @@ public class MainActivity extends BaseActivity {
 
         int finalRadius = Math.max(txt_count.getWidth(), txt_count.getHeight());
 
-
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(txt_count, cx, cy, 0, finalRadius);
+        Animator anim = ViewAnimationUtils.createCircularReveal(txt_count, cx, cy, 0, finalRadius);
 
 
         txt_count.setVisibility(View.VISIBLE);
@@ -150,6 +149,7 @@ public class MainActivity extends BaseActivity {
         anim.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void efectoDentro(final int valor) {
         // get the center for the clipping circle
         // get the center for the clipping circle
@@ -159,9 +159,7 @@ public class MainActivity extends BaseActivity {
 
         int initialRadius = txt_count.getWidth();
 
-
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(txt_count, cx, cy, initialRadius, 0);
+        Animator anim = ViewAnimationUtils.createCircularReveal(txt_count, cx, cy, initialRadius, 0);
 
         anim.addListener(new AnimatorListenerAdapter() {
             @Override
