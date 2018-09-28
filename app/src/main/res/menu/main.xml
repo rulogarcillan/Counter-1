@@ -33,6 +33,12 @@
                 android:icon="@drawable/ic_more"
                 android:title="@string/more"
                 ralr.countersomething:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/privacy_policy"
+                android:icon="@drawable/ic_privacy"
+                android:title="@string/title_privacy_policy"
+                ralr.countersomething:showAsAction="ifRoom" />
         </menu>
     </item>
 

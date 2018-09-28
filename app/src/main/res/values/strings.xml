@@ -4,5 +4,6 @@
     <string name="new_value">New value</string>
     <string name="rate">Rate this app</string>
     <string name="more">Others apps</string>
+    <string name="title_privacy_policy">Privacy policy</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/6391173961</string>
 </resources>
