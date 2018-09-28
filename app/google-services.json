@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "292564500657",
+    "firebase_url": "https://counter-1-b3b81.firebaseio.com",
+    "project_id": "counter-1-b3b81",
+    "storage_bucket": "counter-1-b3b81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292564500657:android:1647248471ff4c8b",
+        "android_client_info": {
+          "package_name": "ralr.countersomething"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292564500657-1152m9adetmbhthjpp6a5hu0o89ongnb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ralr.countersomething",
+            "certificate_hash": "b0e174d5d7c3ad079e9febf726e4c87c375ec9e4"
+          }
+        },
+        {
+          "client_id": "292564500657-3uheq88tni0uk10s4bq30jl9ls6pg8m6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ralr.countersomething",
+            "certificate_hash": "62f688bdaa31290e4cb1e02dbcf3e8adfaeb5617"
+          }
+        },
+        {
+          "client_id": "292564500657-2vgvp3lfg65blnd6g81giev8d3coiksr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZwzRWkzubjKucrwhZhp83gbaQHaiSqVI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292564500657-2vgvp3lfg65blnd6g81giev8d3coiksr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-9438738341601496~2416802765"
+    }
+  ],
+  "configuration_version": "1"
+}
