@@ -149,8 +149,21 @@ public class MainActivity extends BaseActivity {
      * Init advertising
      */
     private void initAdvertising() {
+
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+              //Log.d("Rulo","Rulo");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+               // Log.d("Rulo",i + " fallo");
+            }
+        });
+
     }
 
     private void cambiaValor(int valor) {
