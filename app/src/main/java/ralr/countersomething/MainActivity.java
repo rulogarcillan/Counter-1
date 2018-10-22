@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
     SharedPreferences.Editor editor;
     SharedPreferences prefs;
     String KEY_PREF_COUNT = "TOTAL";
-    AdView mAdView;
+    private AdView mAdView;
 
 
     @Override
@@ -86,9 +86,7 @@ public class MainActivity extends BaseActivity {
         txt_count.setText(Integer.toString(total));
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
-        mAdView = (AdView) findViewById(R.id.adView);
-        initAdvertising();
-
+        mAdView = findViewById(R.id.adView);
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,27 +141,28 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+        initAdvertising();
     }
 
     /**
      * Init advertising
      */
     private void initAdvertising() {
-
+        mAdView.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-              //Log.d("Rulo","Rulo");
+                Log.d("Rulo", "Rulo");
             }
 
             @Override
             public void onAdFailedToLoad(int i) {
-               // Log.d("Rulo",i + " fallo");
+                Log.d("Rulo", i + " fallo");
             }
         });
-
     }
 
     private void cambiaValor(int valor) {
